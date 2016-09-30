@@ -1,17 +1,12 @@
 import * as actions from './actions'
 
-export default store => next => action => {
-    if (action.type === actions.REGISTER) {
-        action.payload.store.async[action.payload.name] = action.payload.reducer;
-        action.payload.store.replaceReducer(
-            action.payload.createReducers(action.payload.store.async)
-        );
-    }
+const reducers = {};
 
-    if (action.type === actions.UNREGISTER) {
-        delete action.payload.store.async[action.payload.name];
+export default createReducers => store => next => action => {
+    if (action.type === actions.REGISTER) {
+        reducers[action.payload.name] = action.payload.reducer;
         action.payload.store.replaceReducer(
-            action.payload.createReducers(action.payload.store.async)
+            createReducers(reducers)
         );
     }
 

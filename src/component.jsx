@@ -1,39 +1,32 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, createElement } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
 
-export default function Enhance(options) {
+export default function Enhance(store, options) {
     return (BaseComponent) => {
         class EnhancedComponent extends Component {
             static propTypes = {
                 register: PropTypes.func.isRequired,
-                unregister: PropTypes.func.isRequired,
             };
 
             componentWillMount() {
-                this.props.register(options);
-            }
-
-            componentWillUnmount() {
-                this.props.unregister(options);
+                this.props.register({ ...options, store });
             }
 
             render() {
-                const { register, unregister, update, ...rest } = this.props
+                const Component = connect(
+                    options.mapStateToProps,
+                    options.actions
+                )(BaseComponent);
 
-                return <BaseComponent {...rest}/>;
+                return createElement(Component)
             }
         }
 
         return connect(
             null,
-            {
-                register: actions.register,
-                unregister: actions.unregister,
-                update: actions.update,
-                ...options.actions
-            }
+            { register: actions.register }
         )(EnhancedComponent);
     };
 }
