@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { connectDynamicStore } from '../../src';
+import { connectDynamicStore } from '../../dist';
 import store from './store';
 
 const changeFruit = (payload) => ({ type: 'CHANGE_FRUIT', payload });

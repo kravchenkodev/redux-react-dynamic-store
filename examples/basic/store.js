@@ -1,5 +1,5 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { createDynamicStoreMiddleware } from '../../src';
+import { createDynamicStoreMiddleware } from '../../dist/index.js'
 
 // test reducers
 const exampleReducer = (state = {}, action) => {
