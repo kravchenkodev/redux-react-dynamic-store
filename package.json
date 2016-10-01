@@ -1,10 +1,12 @@
 {
   "name": "redux-react-dynamic-store",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Allows to register reducers dynamically through react components to help solve code-splitting in large applications. .",
   "main": "src/index.js",
   "scripts": {
-    "start": "node devServer.js"
+    "start": "node devServer.js",
+    "build": "webpack --config webpack.config.dev.js",
+    "prepublish": "webpack --config webpack.config.dev.js"
   },
   "keywords": [
     "redux",
