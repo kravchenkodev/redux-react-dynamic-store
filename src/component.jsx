@@ -3,15 +3,22 @@ import { connect } from 'react-redux';
 
 import * as actions from './actions';
 
-export default function Enhance(store, options) {
+export default function Enhance(optionalStore, options) {
     return (BaseComponent) => {
         class EnhancedComponent extends Component {
+            static contextTypes = {
+                store: PropTypes.object,
+            };
+
             static propTypes = {
                 register: PropTypes.func.isRequired,
             };
 
             componentWillMount() {
-                this.props.register({ ...options, store });
+                const { register } = this.props;
+                const { store } = this.context;
+
+                register({ ...options, store });
             }
 
             render() {
