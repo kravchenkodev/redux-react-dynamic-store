@@ -15,12 +15,14 @@ export default function Enhance(store, options) {
             }
 
             render() {
-                const Component = connect(
+                const { register, ...rest } = this.props;
+
+                const ConnectedComponent = connect(
                     options.mapStateToProps,
                     options.actions
                 )(BaseComponent);
 
-                return createElement(Component)
+                return <ConnectedComponent {...rest} />
             }
         }
 
