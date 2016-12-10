@@ -24,7 +24,9 @@ export default function Enhance(optionalStore, options) {
             render() {
                 const ConnectedComponent = connect(
                     options.mapStateToProps,
-                    options.actions
+                    options.actions,
+                    options.mergeProps,
+                    options.options
                 )(BaseComponent);
 
                 return <ConnectedComponent {...this.props} />;
