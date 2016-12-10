@@ -1,13 +1,11 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { createDynamicStoreMiddleware } from '../../dist/index.js'
+import { createDynamicStoreMiddleware } from '../../dist/index';
 
 // test reducers
-const exampleReducer = (state = {}, action) => {
-    return state;
-};
+const exampleReducer = (state = {}) => state;
 
 // combined test reducers
-export const createReducers = (async) =>
+export const createReducers = async =>
     combineReducers({
         exam1: exampleReducer,
         exam2: exampleReducer,

@@ -1,4 +1,4 @@
-import connect from './component.jsx';
+import connect from './component';
 import middleware from './middleware';
 
 export const connectDynamicStore = connect;

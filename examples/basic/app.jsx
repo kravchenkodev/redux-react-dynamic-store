@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { connectDynamicStore } from '../../dist';
 import store from './store';
 
-const changeFruit = (payload) => ({ type: 'CHANGE_FRUIT', payload });
+const changeFruit = payload => ({ type: 'CHANGE_FRUIT', payload });
 
 class FruitContainer extends Component {
+    static propTypes = {
+        changeFruit: PropTypes.func.isRequired,
+        fruit: PropTypes.string,
+    }
+
     constructor(...args) {
         super(...args);
 
@@ -21,9 +26,9 @@ class FruitContainer extends Component {
                 <input
                     type="text"
                     id="fruit-input"
-                    onChange={(e) => {
+                    onChange={e =>
                         this.setState({ fruit: e.target.value })
-                    }}
+                    }
                 />
                 <button
                     onClick={() =>
@@ -43,25 +48,27 @@ const WrappedFruitContainer = connectDynamicStore(store, {
     actions: {
         changeFruit
     },
-    mapStateToProps: (state) => ({
+    mapStateToProps: state => ({
         fruit: state.componentStore.fruit
     }),
     reducer: (state = { fruit: 'Orange' }, action) => {
         switch (action.type) {
-            case 'CHANGE_FRUIT':
-                return {
-                    ...state,
-                    fruit: action.payload
-                };
-            default:
-                return state;
+        case 'CHANGE_FRUIT':
+            return {
+                ...state,
+                fruit: action.payload
+            };
+        default:
+            return state;
         }
-
-        return state;
     }
-})(FruitContainer)
+})(FruitContainer);
 
-class Application extends Component {
+class Application extends Component { // eslint-disable-line react/no-multi-comp
+    static propTypes = {
+        state: PropTypes.object.isRequired, // eslint-disable-line
+    };
+
     constructor(...args) {
         super(...args);
 
@@ -77,7 +84,7 @@ class Application extends Component {
             <div>
                 <button
                     onClick={() => {
-                        this.setState({ on: !this.state.on })
+                        this.setState({ on: !this.state.on });
                     }}
                 >
                     Switch {this.state.on ? 'Off' : 'On'}
@@ -98,5 +105,5 @@ class Application extends Component {
 }
 
 export default connect(
-    (state) => ({ state })
-)(Application)
+    state => ({ state })
+)(Application);

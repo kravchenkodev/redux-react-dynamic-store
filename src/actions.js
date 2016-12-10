@@ -1,4 +1,4 @@
-const createAction = (type) => (payload, meta) => ({
+const createAction = type => (payload, meta) => ({
     type, payload, meta
 });
 

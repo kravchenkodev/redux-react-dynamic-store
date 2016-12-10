@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, createElement } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from './actions';
@@ -22,14 +22,12 @@ export default function Enhance(optionalStore, options) {
             }
 
             render() {
-                const { register, ...rest } = this.props;
-
                 const ConnectedComponent = connect(
                     options.mapStateToProps,
                     options.actions
                 )(BaseComponent);
 
-                return <ConnectedComponent {...rest} />
+                return <ConnectedComponent {...this.props} />;
             }
         }
 
