@@ -1,4 +1,4 @@
-import connect from './component';
+import connect from './component.jsx'; // eslint-disable-line import/extensions
 import middleware from './middleware';
 
 export const connectDynamicStore = connect;
